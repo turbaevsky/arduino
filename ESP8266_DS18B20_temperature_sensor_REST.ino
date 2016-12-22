@@ -15,15 +15,33 @@
 #include <ESP8266WiFi.h>
 #include <OneWire.h>
 #include <DallasTemperature.h>
+#include <EEPROM.h>
+#include "EIoTCloudRestApiV1.0.h"
+#include "DHT.h"
+
+//#define DEBUG_PROG 
+
+#ifdef DEBUG_PROG
+  #define DEBUG_PRINTLN(x)  Serial.println(x)
+  #define DEBUG_PRINT(x)    Serial.print(x)
+#else
+  #define DEBUG_PRINTLN(x) 
+  #define DEBUG_PRINT(x)
+#endif
+
 ADC_MODE(ADC_VCC); 
 
 //AP definitions - update this
 #define AP_SSID     "BTHub6-HWTS"
 #define AP_PASSWORD "Ng6niWYXktnQ"
+#define INSTANCE_ID "58557de5c943a02af236ca35"
+
+#define CONFIG_START 0
+#define CONFIG_VERSION "v01"
 
 // EasyIoT Cloud definitions - change EIOT_CLOUD_INSTANCE_PARAM_ID
-#define EIOT_CLOUD_INSTANCE_PARAM_ID    "58557de5c943a02af236ca35/kR16iIsGzSI6KPJ3"
-#define EIOT_CLOUD_INSTANCE_PARAM_ID_2    "58557de5c943a02af236ca35/eHMgx30oSxoEWWS8"
+//#define EIOT_CLOUD_INSTANCE_PARAM_ID    "58557de5c943a02af236ca35/kR16iIsGzSI6KPJ3"
+//#define EIOT_CLOUD_INSTANCE_PARAM_ID_2    "58557de5c943a02af236ca35/eHMgx30oSxoEWWS8"
 #define REPORT_INTERVAL 60 // in sec
 
 
